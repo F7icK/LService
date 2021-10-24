@@ -36,7 +36,7 @@
 # Примеры запросов
 
 Добавление пользователя:<br/> [POST] <br/>
-+ _localhost:8080/users name=__[name]__ surname=__[surname]__ telephone=__+79991122333___<br/>
++ _localhost:8080/users name=__[name]__ surname=__[surname]__ telephone=__+79991122333__<br/>
 	
 Вывод всех пользователей:<br/> [GET] <br/>
 + _localhost:8080/users_<br/>
