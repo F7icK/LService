@@ -16,14 +16,14 @@ import (
 type server struct {
 	router *mux.Router
 	logger *logrus.Logger
-	store store.Store
+	store  store.Store
 }
 
 func newServer(store store.Store) *server {
 	s := &server{
 		router: mux.NewRouter(),
 		logger: logrus.New(),
-		store: store,
+		store:  store,
 	}
 
 	s.configureRouter()
@@ -67,15 +67,15 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (s *server) configureRouter() {
 	s.router.Use(s.logRequest)
-	s.router.HandleFunc("/create", s.handleUsersCreate())
-	s.router.HandleFunc("/users", s.handleUsersAllSelect())
-	s.router.HandleFunc("/users/{id:[0-9]+}", s.handleUsersDelete())
+	s.router.HandleFunc("/users", s.handleUsersCreate()).Methods("POST")
+	s.router.HandleFunc("/users", s.handleUsersAllSelect()).Methods("GET")
+	s.router.HandleFunc("/users/{id:[0-9]+}", s.handleUsersDelete()).Methods("DELETE")
 }
 
 func (s *server) handleUsersCreate() http.HandlerFunc {
-	type  request struct {
-		Name string `json:"name"`
-		Surname string `json:"surname"`
+	type request struct {
+		Name      string `json:"name"`
+		Surname   string `json:"surname"`
 		Telephone string `json:"telephone"`
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -85,8 +85,8 @@ func (s *server) handleUsersCreate() http.HandlerFunc {
 			return
 		}
 		u := &model.User{
-			Name: req.Name,
-			Surname: req.Surname,
+			Name:      req.Name,
+			Surname:   req.Surname,
 			Telephone: req.Telephone,
 		}
 		if err := s.store.User().Create(u); err != nil {
@@ -159,7 +159,7 @@ func (s *server) handleUsersDelete() http.HandlerFunc {
 	}
 }
 
-func (s *server) error (w http.ResponseWriter, r *http.Request, code int, err error) {
+func (s *server) error(w http.ResponseWriter, r *http.Request, code int, err error) {
 	s.respond(w, r, code, map[string]string{"error": err.Error()})
 }
 
