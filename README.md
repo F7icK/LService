@@ -53,9 +53,10 @@
 
 # Создано с помощью
 
- -Goland<br/>
+ -Golang 1.17<br/>
+ -Postgres 12.8
  -Ubuntu 20.04<br/>
  
 # Автор
-	
-	F7icK
+
+    F7icK
