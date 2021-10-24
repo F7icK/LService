@@ -35,16 +35,16 @@
 	
 # Примеры запросов
 
-Добавление пользователя:<br/>
-+ _localhost:8080/create name=__[name]__ surname=__[surname]__ telephone=__+79991122333___<br/>
+Добавление пользователя:<br/> [POST] <br/>
++ _localhost:8080/users name=__[name]__ surname=__[surname]__ telephone=__+79991122333___<br/>
 	
-Вывод всех пользователей:<br/>
+Вывод всех пользователей:<br/> [GET] <br/>
 + _localhost:8080/users_<br/>
 
-Удаление пользователя по id:<br/>
+Удаление пользователя по id:<br/> [DELETE] <br/>
 + _localhost:8080/users/__[id]__<br/>
 
-Поиск по номеру телефона:<br/>
+Поиск по номеру телефона:<br/> [GET] <br/>
 + _localhost:8080/users?telephone=__+79991122333___<br/>
 
 # Запуск тестов
